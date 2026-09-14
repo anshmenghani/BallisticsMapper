@@ -1557,3 +1557,5 @@ theta, phi
 with the goal of obtaining the benefits of the detailed physics model
 without repeatedly running the full numerical inverse solver during
 operation.
+
+ChatGPT was used in the making of this README file.
