@@ -421,7 +421,3 @@ class ProjectileSolver:
                 self.lam *= self.lam_scaleup # scale up lambda, move closer to gradient descent (more stable)
 
         return False
-
-ball = Projectile(0.1, 0.3)
-vel_approx_t_list, vx_list, vy_list, vz_list, speedf, pos_approx_t_list, sx_list, sy_list, sz_list, omegaf = ball.trajectory(8, 9, -4, 90, stop_on_y=0)
-ball.plot_solutions(vel_approx_t_list, vx_list, vy_list, vz_list, pos_approx_t_list, sx_list, sy_list, sz_list)

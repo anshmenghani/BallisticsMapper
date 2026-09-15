@@ -1,4 +1,4 @@
-# ProjectileMotionSim
+# BallisticsMapper
 
 A physics-based projectile simulation and inverse-ballistics pipeline
 for a projectile launched from a moving platform.
@@ -94,13 +94,24 @@ Java / Robot-Side Evaluation
 The important source and generated files are:
 
 ``` text
-ProjectileMotionSim/
+BallisticsMapper/
 ├── README.md
 ├── .gitignore
+├── BallisticsMapper.pdf
 │
 ├── ProjectilePath.py
 ├── FuelClearance.py
 ├── FuelPath.py
+│
+├── RK4ExampleOutputs/
+│   └── R=0.1_M=0.3_Vx0=8_Vy0=9_Vz0=-4_omega0=90_dt=0.01/
+│       ├── xpos.png
+│       ├── ypos.png
+│       ├── zpos.png
+│       ├── xvel.png
+│       ├── yvel.png
+│       ├── zvel.png
+│       └── pos.png
 │
 ├── LaunchJavaFiles/
 │   └── PolynomialModel.java
@@ -138,7 +149,7 @@ ProjectileMotionSim/
             └── theta_surface.png
 ```
 
-The ZIP also contains a `.venv` directory and macOS metadata files. The
+The ZIP also contains a `.venv` directory and macOS metadata files. `BallisticsMapper.pdf` is the project report, and `RK4ExampleOutputs/` contains example RK4 simulation plots. The
 `.venv` is a local Python environment and should not be committed to a
 shared/forked repository. A fresh virtual environment should be created
 instead.
@@ -416,10 +427,10 @@ this function.
 
 ### Running surface generation
 
-From the repository root:
+From the directory containing `BallisticsMapper/`:
 
 ``` bash
-python TrajectorySurfaces/TrajectorySurface.py
+python BallisticsMapper/TrajectorySurfaces/TrajectorySurface.py
 ```
 
 The script's currently active entry point calls:
@@ -555,21 +566,21 @@ modeled domain.
 
 ### Running the fitter
 
-From the repository root:
+From the directory containing `BallisticsMapper/`:
 
 ``` bash
-python TrajectorySurfaces/FitTrajectorySurface.py
+python BallisticsMapper/TrajectorySurfaces/FitTrajectorySurface.py
 ```
 
-The current script processes:
+The checked-in generated model directories are:
 
 ``` text
-30_RPS_T
-34_RPS_T
-40_RPS_T
+40_RPS
+50_RPS
+60_RPS
 ```
 
-Therefore those surface directories must exist before running it.
+The fitting script's `dir_list` is still configured with older directory names, so update it to match the current datasets before running it.
 
 If you create a different RPS dataset, add its directory to `dir_list`.
 
@@ -583,9 +594,9 @@ Currently it uses:
 
 ``` python
 RPS_DIRS = {
-    30: '30_RPS_T',
-    34: '34_RPS_T',
-    40: '40_RPS_T'
+    40: '40_RPS',
+    50: '50_RPS',
+    60: '60_RPS'
 }
 ```
 
@@ -634,10 +645,10 @@ optimization.
 
 ### Running it
 
-From the repository root:
+From the directory containing `BallisticsMapper/`:
 
 ``` bash
-python TrajectorySurfaces/GenerateValidShotProfile.py
+python BallisticsMapper/TrajectorySurfaces/GenerateValidShotProfile.py
 ```
 
 The three configured RPS surface directories must exist.
@@ -708,21 +719,21 @@ The polynomial elevation model by itself.
 
 The polynomial azimuth model by itself.
 
-Run:
+Run from the directory containing `BallisticsMapper/`:
 
 ``` bash
-python TrajectorySurfaces/PlotTrajectorySurfaces.py
+python BallisticsMapper/TrajectorySurfaces/PlotTrajectorySurfaces.py
 ```
 
-The script currently expects the RPS directories:
+The checked-in generated model directories are:
 
 ``` text
-30_RPS_T
-34_RPS_T
-40_RPS_T
+40_RPS
+50_RPS
+60_RPS
 ```
 
-and their corresponding model files.
+The plotting script's `dir_list` is still configured with older directory names, so update it to match the current datasets before running it.
 
 ------------------------------------------------------------------------
 
@@ -857,14 +868,14 @@ Then clone your fork:
 
 ``` bash
 git clone <your-fork-url>
-cd ProjectileMotionSim
+cd BallisticsMapper
 ```
 
 Or, if you are starting from the ZIP:
 
 ``` bash
-unzip ProjectileMotionSim.zip
-cd ProjectileMotionSim
+unzip BallisticsMapper.zip
+cd BallisticsMapper
 ```
 
 If the ZIP contains the original `.venv`, it is recommended to delete it
@@ -941,16 +952,16 @@ for public distribution.
 If you only want to use the existing precomputed data and models, **do
 not regenerate the trajectory surfaces**.
 
-Useful commands are:
+From the directory containing `BallisticsMapper/`, use:
 
 ``` bash
-python TrajectorySurfaces/PlotTrajectorySurfaces.py
+python BallisticsMapper/TrajectorySurfaces/PlotTrajectorySurfaces.py
 ```
 
 to inspect the surfaces and polynomial fits, and:
 
 ``` bash
-python FuelPath.py
+python BallisticsMapper/FuelPath.py
 ```
 
 to run the numerical verification workflow.
@@ -959,7 +970,7 @@ Be aware that some scripts use repository-relative paths. Run them from
 the repository root:
 
 ``` text
-ProjectileMotionSim/
+BallisticsMapper/
 ```
 
 rather than changing into `TrajectorySurfaces/`.
@@ -1036,10 +1047,10 @@ python TrajectorySurfaces/GenerateValidShotProfile.py
 
 ## Step 5 --- Inspect the fits
 
-Run:
+Run from the directory containing `BallisticsMapper/`:
 
 ``` bash
-python TrajectorySurfaces/PlotTrajectorySurfaces.py
+python BallisticsMapper/TrajectorySurfaces/PlotTrajectorySurfaces.py
 ```
 
 ## Step 6 --- Verify selected trajectories
@@ -1199,10 +1210,10 @@ legacy names, so take care when changing those files.
 Several scripts use paths beginning with:
 
 ``` text
-ProjectileMotionSim/...
+BallisticsMapper/...
 ```
 
-Run the scripts from the directory containing the `ProjectileMotionSim`
+Run the scripts from the directory containing the `BallisticsMapper`
 folder if you are using the outer project layout, or update the paths if
 you have made the repository itself the working directory.
 
@@ -1217,9 +1228,9 @@ based on `__file__` is recommended.
 For example:
 
 ``` text
-30_RPS_T
-34_RPS_T
-40_RPS_T
+40_RPS
+50_RPS
+60_RPS
 ```
 
 must exist before fitting or generating the multi-RPS valid-shot table.
@@ -1473,44 +1484,45 @@ If you just want to inspect the existing project:
 
 ``` bash
 git clone <your-fork-url>
-cd ProjectileMotionSim
+cd BallisticsMapper
 
 python3 -m venv .venv
 source .venv/bin/activate
 
 python -m pip install numpy matplotlib scikit-learn pandas tabulate
 
-python TrajectorySurfaces/PlotTrajectorySurfaces.py
+cd ..
+python BallisticsMapper/TrajectorySurfaces/PlotTrajectorySurfaces.py
 ```
 
 If you want to verify saved trajectories:
 
 ``` bash
-python FuelPath.py
+python BallisticsMapper/FuelPath.py
 ```
 
 If you intentionally want to regenerate the inverse-solver surfaces:
 
 ``` bash
-python TrajectorySurfaces/TrajectorySurface.py
+python BallisticsMapper/TrajectorySurfaces/TrajectorySurface.py
 ```
 
 then fit them:
 
 ``` bash
-python TrajectorySurfaces/FitTrajectorySurface.py
+python BallisticsMapper/TrajectorySurfaces/FitTrajectorySurface.py
 ```
 
 then rebuild the valid-shot table:
 
 ``` bash
-python TrajectorySurfaces/GenerateValidShotProfile.py
+python BallisticsMapper/TrajectorySurfaces/GenerateValidShotProfile.py
 ```
 
 and finally inspect the results:
 
 ``` bash
-python TrajectorySurfaces/PlotTrajectorySurfaces.py
+python BallisticsMapper/TrajectorySurfaces/PlotTrajectorySurfaces.py
 ```
 
 ------------------------------------------------------------------------
