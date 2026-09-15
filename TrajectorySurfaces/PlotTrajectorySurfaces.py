@@ -121,7 +121,7 @@ def plot_save_models(name):
     print(f"{name} -- plots saved.")
 
 
-dir_list = ["30_RPS_T", "34_RPS_T", "40_RPS_T"]
+dir_list = ["40_RPS_T", "50_RPS_T", "60_RPS_T"]
 
 for d in dir_list:
     plot_save_models(d)
