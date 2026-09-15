@@ -145,8 +145,8 @@ def gen_surface(speed, spin, name=""):
     print(f"Levenberg-Marquardt model failed on {bad_line_count} simulations for {name} run.")
 
 # example
-def rps_20():
-    speed, spin = get_frc900_spin_and_speed_from_shooter_rps(20)
-    gen_surface(speed, spin, name="20_RPS_T")
+def rps_40():
+    speed, spin = get_frc900_spin_and_speed_from_shooter_rps(40)
+    gen_surface(speed, spin, name="40_RPS")
 
-rps_20()
+rps_40()
